@@ -10,13 +10,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/message"
+            android:id="@+id/imageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MainFragment" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="403dp"
+            tools:src="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="30dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:clickable="true"
+                android:paddingBottom="30dp"
+                app:maxImageSize="56dp"
+                app:srcCompat="@android:drawable/ic_menu_revert"
+                android:focusable="true" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:clickable="true"
+                app:maxImageSize="56dp"
+                app:srcCompat="@android:drawable/ic_media_next"
+                android:focusable="true" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

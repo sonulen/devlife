@@ -4,4 +4,5 @@
     <string name="first_category">Latest</string>
     <string name="second_category">Bests</string>
     <string name="third_category">Hots</string>
+    <string name="empty_image_title">Whooops! Nothing for look here</string>
 </resources>
