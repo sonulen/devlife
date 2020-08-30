@@ -12,5 +12,8 @@ class FeedViewModel(private val category: Category) : ViewModel() {
     private val session = Session(category)
     fun getData(): LiveData<Post> = session.currentPost
     fun isHistoryEmpty() = session.isHistoryEmpty()
+    fun nextPost() = session.nextPost()
+    fun prevPost() = session.prevPost()
+    fun yet_another() = session.yet_another()
 
 }

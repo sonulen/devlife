@@ -1,18 +1,23 @@
 package com.example.devlife.ui.main
 
+import android.R.attr.fragment
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.bumptech.glide.MemoryCategory
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.devlife.R
 import com.example.devlife.data.Category
 import com.example.devlife.data.Post
@@ -55,51 +60,59 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProviders
             .of(this, FeedViewModelFactory(category))[FeedViewModel::class.java]
 
-
+        // Обновим fabs и установим на них listener'ов
         if (savedInstanceState == null) {
-            previousFab.isEnabled = !viewModel.isHistoryEmpty()
+            updateFabVisible()
 
             previousFab.setOnClickListener {
-                Toast.makeText(it.context, "Prev fab clicked", Toast.LENGTH_SHORT).show()
-
+                viewModel.prevPost()
             }
 
             nextFab.setOnClickListener {
-                Toast.makeText(it.context, "Next fab clicked", Toast.LENGTH_SHORT).show()
+                viewModel.nextPost()
             }
         }
 
-        // Подпишимся на пост
+        // Подпишимся на обновления текущего поста
         val data: LiveData<Post>? = viewModel.getData()
         data?.observe(this, Observer<Post?> {
-            previousFab.isEnabled = !viewModel.isHistoryEmpty()
-            Toast.makeText(context, "Data changed", Toast.LENGTH_SHORT).show()
+            updateFabVisible()
 
             it?.let {
                 imageTitle.text = it.description
 
-                Glide
-                    .with(this).asGif()
-                    .load(it.gifURL)
+                Glide.with(this).load(it.gifURL)
+                    .thumbnail(Glide.with(this).load(Uri.parse("file:///android_asset/loading.gif")))
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(R.mipmap.ic_loading)
-                    .error(R.mipmap.ic_error)
-                    .into(mImageView);
+                    .into(mImageView)
             }
 
 
         })
 
+        // Загрузим дефолтное состояние
         imageTitle.text = getString(R.string.empty_image_title)
-
-        val resourceId: Int = R.mipmap.ic_launcher
         Glide
             .with(this)
-            .load(resourceId)
+            .load(Uri.parse("file:///android_asset/loading.gif"))
             .fitCenter()
+            .transition(withCrossFade())
             .into(mImageView);
+    }
 
+    fun updateFabVisible() {
+        if (viewModel.isHistoryEmpty()) {
+            previousFab.hide()
+        } else {
+            previousFab.show()
+        }
+
+        if (viewModel.yet_another()) {
+            nextFab.show()
+        } else {
+            nextFab.hide()
+        }
     }
 
 }

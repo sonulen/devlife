@@ -19,11 +19,9 @@ class Session(private val category: Category) {
     var currentPost: MutableLiveData<Post> = MutableLiveData()
     private var totalCount = 0
     private var currentPage = 0
-    private var currentPostIndex = 0
+    private var currentPostIndex = -1
 
-
-
-    lateinit var service: DevLifeFeedService
+    var service: DevLifeFeedService
 
     init {
         var client = OkHttpClient.Builder().build();
@@ -50,6 +48,7 @@ class Session(private val category: Category) {
             .subscribe(
                 { page ->
                     totalCount = page.totalCount
+
                     if (totalCount == 0) {
                         // Постов нет
                         return@subscribe
@@ -59,12 +58,32 @@ class Session(private val category: Category) {
                         posts.add(post)
                     }
 
+                    currentPostIndex++;
+                    currentPage=pageNum
                     currentPost.value = posts[currentPostIndex]
                 },
                 { _ ->  Log.d("Session", "Не смогли загрузить категория = " + category.category)}
             )
     }
 
-    fun isHistoryEmpty() : Boolean = (posts.size == 0)
+    fun isHistoryEmpty() : Boolean = (currentPostIndex <= 0)
+
+    fun nextPost() {
+        if (currentPostIndex == posts.count() - 1) {
+            loadPage(currentPage+1)
+        } else {
+            currentPostIndex++;
+            currentPost.value = posts[currentPostIndex]
+        }
+    }
+
+    fun prevPost() {
+        if (currentPostIndex >= 1) {
+            currentPostIndex--;
+            currentPost.value = posts[currentPostIndex]
+        }
+    }
+
+    fun yet_another() = (totalCount - currentPostIndex > 1)
 
 }
