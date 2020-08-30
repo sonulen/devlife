@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">devlife</string>
+    <string name="title">Developers Life</string>
+    <string name="first_category">Latest</string>
+    <string name="second_category">Bests</string>
+    <string name="third_category">Hots</string>
 </resources>
