@@ -33,9 +33,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(MainFragment.newInstance(Category.LATEST), getString(R.string.first_category))
-        adapter.addFragment(MainFragment.newInstance(Category.BESTS), getString(R.string.second_category))
-        adapter.addFragment(MainFragment.newInstance(Category.HOTS), getString(R.string.third_category))
+        adapter.addFragment(
+            MainFragment.newInstance(Category.LATEST),
+            getString(R.string.first_category)
+        )
+        adapter.addFragment(
+            MainFragment.newInstance(Category.BESTS),
+            getString(R.string.second_category)
+        )
+        adapter.addFragment(
+            MainFragment.newInstance(Category.HOTS),
+            getString(R.string.third_category)
+        )
         viewPager.adapter = adapter
     }
 
@@ -54,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             it.currentItem = tabIndex;
         }
         tabLayout?.let {
-            it.setScrollPosition(tabIndex,0f,true);
+            it.setScrollPosition(tabIndex, 0f, true);
         }
     }
 

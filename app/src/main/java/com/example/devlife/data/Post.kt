@@ -1,5 +1,8 @@
 package com.example.devlife.data
 
+/*
+    Один Post от Api https://developerslife.ru/
+ */
 data class Post(
     val author: String,
     val canVote: Boolean,

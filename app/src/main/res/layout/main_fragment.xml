@@ -11,66 +11,66 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true" >
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/imageTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="403dp"
-            tools:src="@tools:sample/avatars" />
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="20dp"
-            android:paddingBottom="30dp">
+            android:orientation="vertical">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_prev"
+            <TextView
+                android:id="@+id/imageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:backgroundTint="#FFFFFF"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingBottom="30dp"
-                app:maxImageSize="56dp"
-                app:elevation="0dp"
-                app:rippleColor="@null"
-                app:backgroundTint="@null"
-                app:srcCompat="@drawable/ic_undo" />
+                android:paddingTop="20dp" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:backgroundTint="#00FFFFFF"
-                android:clickable="true"
-                android:focusable="true"
-                app:maxImageSize="56dp"
-                app:elevation="0dp"
-                app:rippleColor="@null"
-                app:backgroundTint="@null"
-                app:srcCompat="@drawable/ic_next" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="403dp"
+                tools:src="@tools:sample/avatars" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:paddingBottom="30dp">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_prev"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingBottom="30dp"
+                    app:maxImageSize="56dp"
+                    app:elevation="0dp"
+                    app:rippleColor="@null"
+                    app:backgroundTint="@null"
+                    app:srcCompat="@drawable/ic_undo" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:maxImageSize="56dp"
+                    app:elevation="0dp"
+                    app:rippleColor="@null"
+                    app:backgroundTint="@null"
+                    app:srcCompat="@drawable/ic_next" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
     </ScrollView>
 

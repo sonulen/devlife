@@ -10,5 +10,4 @@ class FeedViewModelFactory(private val category: Category) :
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return FeedViewModel(category) as T
     }
-
 }

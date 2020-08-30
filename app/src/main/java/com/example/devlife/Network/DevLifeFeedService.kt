@@ -5,7 +5,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface DevLifeFeedService{
+interface DevLifeFeedService {
     @GET("/{category}/{page_num}?json=true")
     fun getPage(
         @Path("category") category: String,

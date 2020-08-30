@@ -1,7 +1,5 @@
 package com.example.devlife.ui.main
 
-import android.R.attr.fragment
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,8 +12,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import com.bumptech.glide.MemoryCategory
-import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.devlife.R
@@ -42,8 +38,10 @@ class MainFragment : Fragment() {
     private lateinit var category: Category
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         val v = inflater.inflate(R.layout.main_fragment, container, false)
 
@@ -82,7 +80,9 @@ class MainFragment : Fragment() {
                 imageTitle.text = it.description
 
                 Glide.with(this).load(it.gifURL)
-                    .thumbnail(Glide.with(this).load(Uri.parse("file:///android_asset/loading.gif")))
+                    .thumbnail(
+                        Glide.with(this).load(Uri.parse("file:///android_asset/loading.gif"))
+                    )
                     .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(mImageView)
@@ -108,7 +108,7 @@ class MainFragment : Fragment() {
             previousFab.show()
         }
 
-        if (viewModel.yet_another()) {
+        if (viewModel.yetAnotherPost()) {
             nextFab.show()
         } else {
             nextFab.hide()

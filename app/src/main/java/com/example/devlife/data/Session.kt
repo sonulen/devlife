@@ -7,7 +7,6 @@ import com.example.devlife.Network.DevLifeFeedService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,8 +14,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Session(private val category: Category) {
 
+    // Все загруженные посты
     private var posts: MutableList<Post> = mutableListOf()
+
+    // Пост который показывается на фрагменте.
     var currentPost: MutableLiveData<Post> = MutableLiveData()
+
     private var totalCount = 0
     private var currentPage = 0
     private var currentPostIndex = -1
@@ -25,7 +28,6 @@ class Session(private val category: Category) {
 
     init {
         var client = OkHttpClient.Builder().build();
-
 
         var retrofit = Retrofit.Builder()
             .baseUrl("https://developerslife.ru/")
@@ -36,8 +38,8 @@ class Session(private val category: Category) {
 
         service = retrofit.create<DevLifeFeedService>(DevLifeFeedService::class.java)
 
+        // При инстанцировании загружаем сразу 0ую страницу
         loadPage(currentPage)
-
     }
 
     @SuppressLint("CheckResult")
@@ -59,18 +61,18 @@ class Session(private val category: Category) {
                     }
 
                     currentPostIndex++;
-                    currentPage=pageNum
+                    currentPage = pageNum
                     currentPost.value = posts[currentPostIndex]
                 },
-                { _ ->  Log.d("Session", "Не смогли загрузить категория = " + category.category)}
+                { _ -> Log.d("Session", "Не смогли загрузить категория = " + category.category) }
             )
     }
 
-    fun isHistoryEmpty() : Boolean = (currentPostIndex <= 0)
+    fun isHistoryEmpty(): Boolean = (currentPostIndex <= 0)
 
     fun nextPost() {
         if (currentPostIndex == posts.count() - 1) {
-            loadPage(currentPage+1)
+            loadPage(currentPage + 1)
         } else {
             currentPostIndex++;
             currentPost.value = posts[currentPostIndex]
@@ -84,6 +86,6 @@ class Session(private val category: Category) {
         }
     }
 
-    fun yet_another() = (totalCount - currentPostIndex > 1)
+    fun yetAnotherPost() = (totalCount - currentPostIndex > 1)
 
 }
